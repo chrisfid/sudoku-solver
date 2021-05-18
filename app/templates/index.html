@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Solver</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <form action="{{url_for('index')}}" method="POST">
+      <table>
+          <tbody>
+              {% for row in board %}
+              <tr>
+                {% for col in row %}
+                <td><input pattern="\d*" inputmode="numeric" size="1" maxlength="1" min="1" max="9" autocomplete="off" tabindex="0" class="cell" name = "cells" value={{col}}></td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <br>
+      <div>
+        <input class="submit" type="submit" value="Solve" name="sudoku" id="solve-sudoku">
+        <input class="submit" type="submit" value="Random" name="sudoku">
+        <input class="submit" type="submit" value="Reset" name="sudoku">
+      </div>
+    </form>
+    <br>
+  </div>
+  <script>
+    function fillEmptyCells(){
+        const cells = document.getElementsByClassName('cell')
+        for (let cell of cells) {
+          if (cell.value == '')
+            cell.value = 0
+        }           
+    }
+
+  document.getElementById('solve-sudoku').onclick = fillEmptyCells;
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+:root {
+  --blackish: #2f2f2f;
+}
+
+body {
+  height: 100vh;
+  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+
+}
+
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+form {
+  /* text-align: center; */
+    display: inline-block;
+  /* width: 50%; */
+        /* margin-left : 25% */
+  /* display: inline-block; */
+  /* margin: 0 auto;  */
+  /* width:250px; */
+
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* Cells */
+td input {
+  border: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  color: var(--blackish);
+  font-size: 18px;
+}
+td {
+  border: 1px solid var(--blackish);
+}
+
+/* Boxes */
+td:nth-of-type(3),
+td:nth-of-type(6) {   
+  border-right: 3.5px solid var(--blackish);
+}
+tr:nth-of-type(3) td,
+tr:nth-of-type(6) td {    
+  border-bottom: 3.5px solid var(--blackish);
+}
+
+.submit {
+  padding: 0.7em;
+  border: 1px solid var(--blackish);
+  border-radius: 5px;
+}
