@@ -16,7 +16,7 @@ def index():
       s1 = SudokuSolver(board)
       s1.solve()
       session['board'] = s1.board
-    elif request.form['sudoku'] == 'Random':
+    elif request.form['sudoku'] == 'Randomize':
       session['board'] = random.choice(SudokuSolver.samples())
     return redirect(url_for('index'))
 
