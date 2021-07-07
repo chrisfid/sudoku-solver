@@ -1,29 +1,28 @@
-from flask.helpers import url_for
-from app import app
 from flask import render_template, request, redirect, session
-from app.solve import SudokuSolver
-import random
+from flask.helpers import url_for
+from app import app, solver
+
 
 @app.route("/index", methods=['GET', 'POST'])
 @app.route("/", methods=['GET', 'POST'])
 def index():
-  if request.method == 'POST':
-    if request.form['sudoku'] == 'Reset':
-      session['board'] = SudokuSolver.empty_board()
-    elif request.form['sudoku'] == 'Solve':
-      cells = request.form.getlist('cells', type=int)
-      board = SudokuSolver.multidict_to_board(cells)
-      s1 = SudokuSolver(board)
-      s1.solve()
-      session['board'] = s1.board
-    elif request.form['sudoku'] == 'Randomize':
-      session['board'] = random.choice(SudokuSolver.samples())
-    return redirect(url_for('index'))
+    if request.method == 'POST':
+        # Reset
+        if request.form['sudoku'] == 'Reset':
+            session['board'] = solver.create_empty_board()
+        # Solve
+        elif request.form['sudoku'] == 'Solve':
+            cells = request.form.getlist('cells', type=int)
+            board = solver.multidict_to_board(cells)
+            session['board'] = solver.solve(board)
+        # Randomize
+        elif request.form['sudoku'] == 'Randomize':
+            session['board'] = solver.new_board(level=1)
+        return redirect(url_for('index'))
 
-  if request.method == 'GET':
-    board = SudokuSolver.empty_board()
-    try:
-      board = session['board']
-    except Exception as e:
-      print(e)
-    return render_template("index.html", board=board)
+    if request.method == 'GET':
+        # Try to get a board from a session
+        try:
+            return render_template("index.html", board=session['board'])
+        except:
+            return render_template("index.html", board=solver.create_empty_board())

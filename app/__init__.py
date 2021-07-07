@@ -1,8 +1,14 @@
-from flask import Flask, session
+from app.solve import SudokuSolver
+from flask import Flask
+from app.solve import SudokuSolver
+import os
+
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = b'OQX\xf7|]\xd8\xee\xc6\xe5\xeb\x02\xfb\x8f\xc3\xbd'
+solver = SudokuSolver()
+
+app.config['SECRET_KEY'] = 'WuAIg9VzjDlAopVxSK9xfQ'
 
 from app import routes
 
-app.run(debug=True)
+app.run(debug=1)
