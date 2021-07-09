@@ -30,14 +30,9 @@ body {
   text-align: center;
 }
 
+/* Center grid */
 form {
-  /* text-align: center; */
   display: inline-block;
-  /* width: 50%; */
-  /* margin-left : 25% */
-  /* display: inline-block; */
-  /* margin: 0 auto;  */
-  /* width:250px; */
 }
 
 table {
@@ -52,10 +47,10 @@ td input {
   box-shadow: none;
   outline: none;
   text-align: center;
-  width: 50px;
-  height: 50px;
+  width: 3rem;
+  height: 3rem;
   color: var(--blackish);
-  font-size: 18px;
+  font-size: 1.5rem;
 }
 td {
   border: 1px solid var(--blackish);
@@ -72,9 +67,14 @@ tr:nth-of-type(6) td {
 }
 
 .submit {
+  width: 10rem;
   padding: 0.7em;
   border: 1px solid var(--blackish);
   border-radius: 5px;
+}
+
+.submit-lvl {
+  width: 5rem;
 }
 
 .sidebar {
@@ -83,4 +83,22 @@ tr:nth-of-type(6) td {
   height: 150vh;
   width: 250px;
   color: red;
+}
+
+/* ----------- iPhone X ----------- */
+
+/* Portrait and Landscape */
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+  /* Cells */
+  td input {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.3rem;
+  }
+  .submit {
+    width: 30vw;
+    padding: 0.7em;
+    border: 1px solid var(--blackish);
+    border-radius: 5px;
+  }
 }

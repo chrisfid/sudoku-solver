@@ -82,6 +82,7 @@ class SudokuSolver:
 
     def new_board(self, level):
         url = f'http://www.cs.utep.edu/cheon/ws/sudoku/new/?size=9&level={level}'
+        print(url)
 
         resp = requests.get(url)
         data = resp.json()

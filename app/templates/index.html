@@ -19,6 +19,7 @@
   </head>
   <body>
     <div class="container">
+    <div>
       <form action="{{url_for('index')}}" method="POST">
         <table>
           <tbody>
@@ -46,20 +47,25 @@
           </tbody>
         </table>
         <br />
+        </div>
         <div>
           <input
             class="submit"
             type="submit"
             value="Solve"
-            name="sudoku"
+            name="sudoku-option"
             id="solve-sudoku"
           />
-          <input class="submit" type="submit" value="Randomize" name="sudoku" />
-          <input class="submit" type="submit" value="Reset" name="sudoku" />
+          <input class="submit" type="submit" value="Randomize" name="sudoku-option" />
+          <input class="submit" type="submit" value="Reset" name="sudoku-option" />
+          <br>
+          <br>
+          <input class="submit submit-lvl" type="submit" name="sudoku-level" id="id_name" value="Easy">
+          <input class="submit submit-lvl" type="submit" name="sudoku-level" id="id_name" value="Medium">
+          <input class="submit submit-lvl" type="submit" name="sudoku-level" id="id_name" value="Hard">
         </div>
       </form>
-      <br />
-    </div>
+      </div>
     <script>
       function fillEmptyCells() {
         const cells = document.getElementsByClassName('cell');
