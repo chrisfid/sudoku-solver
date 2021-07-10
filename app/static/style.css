@@ -21,6 +21,10 @@ body {
   );
 }
 
+div.space-between {
+  margin: 0.5rem;
+}
+
 .container {
   position: absolute;
   left: 50%;
@@ -47,11 +51,16 @@ td input {
   box-shadow: none;
   outline: none;
   text-align: center;
-  width: 3rem;
-  height: 3rem;
+  width: 3.2rem;
+  height: 3.2rem;
   color: var(--blackish);
   font-size: 1.5rem;
 }
+
+input:focus {
+  border: 0.1rem solid gray;
+}
+
 td {
   border: 1px solid var(--blackish);
 }

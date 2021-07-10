@@ -15,81 +15,138 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
-<body>
   </head>
   <body>
     <div class="container">
-    <div>
-      <form action="{{url_for('index')}}" method="POST">
-        <table>
-          <tbody>
-            {% for row in board %}
-            <tr>
-              {% for col in row %}
-              <td>
+      <div>
+        <form action="{{url_for('index')}}" method="POST">
+          <div>
+            <form action="{{url_for('index')}}" method="POST">
+              <table id="example">
+                <tbody>
+                  {% for row in board %}
+                  <tr>
+                    {% for col in row %}
+                    <td>
+                      <input
+                        pattern="\d*"
+                        inputmode="numeric"
+                        size="1"
+                        maxlength="1"
+                        min="1"
+                        max="9"
+                        autocomplete="off"
+                        tabindex="0"
+                        class="cell"
+                        name="cells"
+                        value="{{col}}"
+                        onclick="goEndLine()"
+                      />
+                    </td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <br />
+              <div class="space-between"></div>
+              <div>
                 <input
-                  pattern="\d*"
-                  inputmode="numeric"
-                  size="1"
-                  maxlength="1"
-                  min="1"
-                  max="9"
-                  autocomplete="off"
-                  tabindex="0"
-                  class="cell"
-                  name="cells"
-                  value="{{col}}"
+                  class="submit"
+                  type="submit"
+                  value="Solve"
+                  name="sudoku-option"
+                  id="solve-sudoku"
                 />
-              </td>
-              {% endfor %}
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <br />
-        </div>
-        <div>
-          <input
-            class="submit"
-            type="submit"
-            value="Solve"
-            name="sudoku-option"
-            id="solve-sudoku"
-          />
-          <input class="submit" type="submit" value="Randomize" name="sudoku-option" />
-          <input class="submit" type="submit" value="Reset" name="sudoku-option" />
-          <br>
-          <br>
-          <input class="submit submit-lvl" type="submit" name="sudoku-level" id="id_name" value="Easy">
-          <input class="submit submit-lvl" type="submit" name="sudoku-level" id="id_name" value="Medium">
-          <input class="submit submit-lvl" type="submit" name="sudoku-level" id="id_name" value="Hard">
-        </div>
-      </form>
-      </div>
-    <script>
-      function fillEmptyCells() {
-        const cells = document.getElementsByClassName('cell');
-        for (let cell of cells) {
-          if (cell.value == '') cell.value = 0;
-        }
-      }
+                <input
+                  class="submit"
+                  type="submit"
+                  value="Randomize"
+                  name="sudoku-option"
+                />
+                <input
+                  class="submit"
+                  type="submit"
+                  value="Reset"
+                  name="sudoku-option"
+                />
+                <div class="space-between"></div>
+                <input
+                  class="submit submit-lvl"
+                  type="submit"
+                  name="sudoku-level"
+                  value="Easy"
+                />
+                <input
+                  class="submit submit-lvl"
+                  type="submit"
+                  name="sudoku-level"
+                  value="Medium"
+                />
+                <input
+                  class="submit submit-lvl"
+                  type="submit"
+                  name="sudoku-level"
+                  value="Hard"
+                />
+              </div>
+            </form>
+          </div>
+          <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"
+          ></script>
+          <script>
+            src =
+              'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js';
+            integrity =
+              'sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM';
+            crossorigin = 'anonymous';
+          </script>
 
-      document.getElementById('solve-sudoku').onclick = fillEmptyCells;
-    </script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
+          <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous"
+          ></script>
+          <script src="{{ url_for('static', filename='dist/arrow-table.min.js') }}"></script>
+          <script>
+            // Navigate Between Table Cells Using Arrow Keys (by garygreen)
+            $('#example').arrowTable();
+            $('#example').arrowTable({
+              // Function to call after navigating
+              afterMove: function (input, targetFinder, direction) {
+                for (let cell of cells) {
+                  // Move the the end of a line
+                  cell.selectionStart = 1;
+                }
+              },
+            });
+          </script>
+          <script>
+            const cells = document.getElementsByClassName('cell');
+            cells[0].focus();
+            goEndLine();
+
+            function goEndLine() {
+              for (let cell of cells) {
+                // Move the the end of a line
+                cell.selectionStart = 1;
+              }
+            }
+
+            // You cannot pass null values
+            function fillEmptyCells() {
+              for (let cell of cells) {
+                if (cell.value == '') cell.value = 0;
+              }
+            }
+
+            document.getElementById('solve-sudoku').onclick = fillEmptyCells;
+          </script>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
