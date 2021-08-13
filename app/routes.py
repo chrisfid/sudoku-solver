@@ -18,8 +18,9 @@ def index():
                 session['board'] = solver.solve(board)
             # Randomize
             elif request.form['sudoku-option'] == 'Randomize':
+
                 session['board'] = solver.new_board(
-                    level=session['level'] if session['level'] is not None else 1)
+                    level=session.get('level') if session.get('level') is not None else 1)
         elif 'sudoku-level' in request.form:
             if request.form['sudoku-level'] == 'Easy':
                 session['level'] = 1
@@ -32,6 +33,6 @@ def index():
     if request.method == 'GET':
         # Try to get a board from a session
         try:
-            return render_template("index.html", board=session['board'])
+            return render_template('index.html', board=session['board'])
         except:
-            return render_template("index.html", board=solver.create_empty_board())
+            return render_template('index.html', board=solver.create_empty_board())
