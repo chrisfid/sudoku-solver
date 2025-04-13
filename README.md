@@ -29,8 +29,13 @@ The solver assumes all given numbers are valid. Incorrect inputs may result in n
 
 ## 🧠 Tech Stack
 
-- **Python** (Flask)
-- **HTML, CSS, JavaScript**
+- **Python**
+- **Flask**
+- **JavaScript**
+- **jQuery**
+- **HTML**
+- **CSS**
+- **Bootstrap**
 - **Backtracking Algorithm** for solving puzzles
 
 ## 📸 Screenshots
